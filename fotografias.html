@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* TIKTOK @Code The World */
+        *{
+            border: 0;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #e2dbdb; /* Cambiamos el color de fondo a gris */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative; /* Asegura que los elementos posicionados absolutamente se basen en el body */
+        }
+
+        .login {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            color: hsl(223, 10%, 10%);
+            font: 1em/1.5 "DM Sans", sans-serif;
+        }
+
+        .column {
+            width: 50%;
+            background-color: rgb(252, 246, 246);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            padding: 1.5em;
+            position: relative;
+        }
+
+        .header {
+            width: 100%;
+            padding: 1.5em 0;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: calc(2em + 0.5vw); /* Ajusta el tamaño del sombrero según el tamaño de la pantalla */
+            line-height: 1;
+            margin: auto;
+            width: 9rem;
+        }
+
+        .form {
+            width: 22em;
+            flex-shrink: 0;
+            margin: 3em 0;
+            height: min-content;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: 0 0 1.5em;
+            text-align: center;
+        }
+
+        .segmented {
+            position: relative;
+            background-color: hsl(233,10%,90%);
+            border-radius: 0.75em;
+            display: flex;
+            margin-bottom: 1.5em;
+            min-height: 3em;
+        }
+
+        .segmented-btn {
+            border-radius: 0.875em;
+            box-shadow: 0 0 0 0.1875em var(--focus-t) inset;
+            color: hsl(233, 10%, 40%);
+            cursor: pointer;
+            outline: transparent;
+            padding: 0.75em;
+            width: 100%;
+            background-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        .segmented-btn [aria-selected=true] {
+            color: hsl(223, 10%, 10%);
+        }
+
+        .segmented-focus {
+            background-color: white;
+            border-radius: 0.625em;
+            pointer-events: none;
+            position: absolute;
+            top: 0.25em;
+            bottom: 0.25em;
+            left: 0.25em;
+            width: calc(50% - 0.5em);
+        }
+
+        .field {
+            position: relative;
+            margin-bottom: 2.25em;
+        }
+
+        .input-textbox {
+            width: 100%;
+            background-color: transparent;
+            border-radius: 0.75em;
+            box-shadow: 0 0 0 0.125em hsl(223, 10%, 80%) inset; 
+            outline: transparent;
+            padding: 1.5em 1em 0.5em 1em;
+            padding-inline-end: 3.5em;
+            appearance: none;
+        }
+
+        .label {
+            color: hsl(var(--hue), 10%, 30%);
+            cursor: text;
+            display: inline-block; /* Cambiado de flex a inline-block */
+            position: absolute;
+            top: 1.8em; /* Ajustar según el diseño */
+            left: 1em;
+            pointer-events: none;
+        }
+
+        .btn {
+            width: 100%;
+            background-color: hsl(223, 90%, 50%);
+            border-radius: 0.75em;
+            box-shadow: 
+            0 0 0 0.1em hsl(223deg 10% 90% / 0%),
+            0 0 0 0.3em hsl(223deg 90% 50% / 0%);
+            color: white;
+            margin-bottom: 1.5em;
+            padding: 1em;
+            cursor: pointer;
+            display: block;
+            outline: transparent;
+        }
+
+        .or {
+            color: hsl(223, 10%, 40%);
+            display: flex;
+            align-items: center;
+            font-size: 0.75em;
+            line-height: 2;
+            margin-bottom: 1.5em;
+            text-align: center;
+        }
+
+        .or:before, 
+        .or::after {
+            background-color: hsl(223, 10%, 70%);
+            content: "";
+            display: block;
+            flex: 1;
+            height: 1px;
+        }
+
+        .or:before {
+            margin-inline-end: 0.75em;
+        }
+
+        .or::after {
+            margin-inline-start: 0.75em;
+        }
+
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5em;
+            margin-bottom: 1.5em;
+        }
+
+        .social-btn {
+            width: 3.4em;
+            height: 3.4em;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0.2em hsl(223deg 90% 50% / 0%);
+            cursor: pointer;
+            outline: transparent;
+        }
+
+        .footer {
+            width: 100%;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 0.75em;
+            line-height: 1.3;
+            list-style: none;
+        }
+
+        a {
+            border-radius: 0.25em;
+            box-shadow: 0 0 0 0.2em hsl(223deg 90% 50% / 0%);
+            outline: transparent;
+        }
+
+        .column--bg {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+            height: 100vh; /* Ocupa toda la altura de la pantalla */
+        }
+
+        .bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8) saturate(120%);
+        }
+
+        .bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Aseguramos que las burbujas estén por encima de la imagen de fondo */
+        }
+
+        .bubble {
+            position: absolute;
+            background-color: rgba(200, 200, 200, 0.7); /* Cambiamos el color de las burbujas a gris */
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .bubble::before {
+            content: '';
+            display: block;
+            padding-top: 100%;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
+        .password-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 2.25em;
+        }
+
+        .password-input {
+            width: calc(100% - 3.5em);
+            background-color: transparent;
+            border-radius: 0.75em;
+            box-shadow: 0 0 0 0.125em hsl(223, 10%, 80%) inset; 
+            outline: transparent;
+            padding: 1.5em 1em 0.5em 1em;
+            padding-inline-end: 3.5em;
+            appearance: none;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        /* Changes */
+        .wizard-text {
+            position: absolute; /* Posición absoluta para que esté sobre la imagen */
+            top: -70px; /* Posición ajustada desde arriba */
+            left: 50%; /* Centrado horizontal */
+            transform: translateX(-50%); /* Centrado horizontal */
+            font-size: 36px; /* Tamaño del texto */
+            font-family: "Harlow Solid", sans-serif; /* Tipo de letra */
+            font-style: italic; /* Cursiva */
+            font-weight: normal; /* Normal */
+            color: #000000; /* Color de texto */
+            z-index: 1; /* Asegurarse de que esté sobre la imagen */
+            display: flex;
+            align-items: center;
+        }
+
+        .wizard-text img {
+            width: 50px; /* Tamaño del icono */
+            height: 50px; /* Tamaño del icono */
+            margin-right: 10px; /* Espacio entre el icono y el texto */
+        }
+
+        .social {
+            margin-top: 1.5em;
+        }
+
+        .social-btn i {
+            font-size: 1.5em;
+        }
+
+        .footer {
+            margin-top: 1.5em;
+            text-align: center;
+        }
+
+        .footer-nav {
+            justify-content: center;
+            gap: 1em;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <div class="wizard-text">
+        <img src="https://img.icons8.com/ios-filled/50/000000/camera.png" alt="Icono de cámara">
+        WIZARD
+    </div>
+    <form class="login" action="galeria.html">
+        <div class="column column--bg">
+            <div class="bubbles">
+                <div class="bubble" style="top: 50%; left: 10%; width: 30px; height: 30px;"></div>
+                <div class="bubble" style="top: 20%; left: 20%; width: 20px; height: 20px;"></div>
+                <div class="bubble" style="top: 70%; left: 30%; width: 25px; height: 25px;"></div>
+                <div class="bubble" style="top: 40%; left: 40%; width: 15px; height: 15px;"></div>
+                <div class="bubble" style="top: 60%; left: 50%; width: 35px; height: 35px;"></div>
+                <div class="bubble" style="top: 30%; left: 60%; width: 20px; height: 20px;"></div>
+                <div class="bubble" style="top: 80%; left: 70%; width: 25px; height: 25px;"></div>
+                <div class="bubble" style="top: 50%; left: 80%; width: 30px; height: 30px;"></div>
+                <div class="bubble" style="top: 90%; left: 90%; width: 15px; height: 35px;"></div>
+                <!-- Agrega más burbujas con diferentes tamaños y posiciones -->
+            </div>
+            <img class="bg-img" src="https://fondosmil.com/fondo/62356.jpg" alt="Fondo">
+        </div>
+        <div class="column">
+            <div class="header">
+                <div class="image-container">
+                    <div class="wizard-text" style="color: #000000; font-family: 'Harlow Solid', sans-serif; font-style: italic;">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/camera.png" alt="Icono de cámara">
+                        WIZARD
+                    </div>
+                </div>
+            </div>
+            <div class="form">
+                <h1>Preserva tus momentos favoritos para siempre</h1>
+                <div class="field">
+                    <input class="input-textbox" type="email" name="email" id="user-email" placeholder="Correo electrónico" required>
+                    <label class="label" for="user-email"></label>
+                </div>
+                <div class="password-container field">
+                    <input class="password-input" type="password" name="password" id="user-password" placeholder="Contraseña" required>
+                    <span class="toggle-password" onclick="togglePasswordVisibility()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="none" d="M0 0h24v24H0V0z"/>
+                            <path d="M12 7C8.13 7 5 10.13 5 14s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7zm0 12c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.38 0-2.61.56-3.54 1.46l1.06 1.06c.44-.44 1.05-.72 1.72-.72s1.28.28 1.72.72c.98.99.98 2.59 0 3.58-.44.44-1.05.72-1.72.72s-1.28-.28-1.72-.72l-1.06 1.06c.93.91 2.16 1.46 3.54 1.46 2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+                        </svg>
+                    </span>
+                </div>
+                <button class="btn" type="submit">Continuar</button>
+                <div class="or">O Continuar Con</div>
+                <div class="social">
+                    <button class="social-btn"><i class="fa-brands fa-google"></i></button>
+                    <button class="social-btn"><i class="fa-brands fa-apple"></i></button>
+                    <button class="social-btn"><i class="fa-brands fa-github"></i></button>
+                </div>
+            </div>
+            <div class="footer">
+                <ul class="footer-nav">
+                    <li><a href="#">Términos de Uso</a></li>
+                    <li><a href="#">Divulgaciones</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('user-password');
+            const togglePassword = document.querySelector('.toggle-password');
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                togglePassword.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="none" d="M0 0h24v24H0V0z"/>
+                    <path d="M12 7C8.13 7 5 10.13 5 14s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7zm0 12c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.38 0-2.61.56-3.54 1.46l1.06 1.06c.44-.44 1.05-.72 1.72-.72s1.28.28 1.72.72c.98.99.98 2.59 0 3.58-.44.44-1.05.72-1.72.72s-1.28-.28-1.72-.72l-1.06 1.06c.93.91 2.16 1.46 3.54 1.46 2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+                </svg>`;
+            } else {
+                passwordInput.type = "password";
+                togglePassword.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="none" d="M0 0h24v24H0V0z"/>
+                    <path d="M12 7C8.13 7 5 10.13 5 14s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7zm0 12c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.38 0-2.61.56-3.54 1.46l1.06 1.06c.44-.44 1.05-.72 1.72-.72s1.28.28 1.72.72c.98.99.98 2.59 0 3.58-.44.44-1.05.72-1.72.72s-1.28-.28-1.72-.72l-1.06 1.06c.93.91 2.16 1.46 3.54 1.46 2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+                </svg>`;
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
